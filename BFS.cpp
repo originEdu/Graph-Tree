@@ -99,4 +99,16 @@ void PrintShortestPath(int Start, int Dest)
 		}
 	};
 	cout << endl;
+
+	//reverse 사용하지 않고 출력하는 방법
+	//for (int i = Path.size() - 1; i >= 0; i--)
+	//{
+	//	cout << Path[i];
+	//	if (i > 0) 
+	//	{
+	//		cout << "->";
+	//	}
+	//}
+	//cout << endl;
+	//End_reverse 사용하지 않고 출력하는 방법
 }
