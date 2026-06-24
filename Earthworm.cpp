@@ -32,17 +32,7 @@ void DFS(int CurrentX, int CurrentY)
 			continue;
 		}
 
-		if (Map[X][Y] == 0)
-		{
-			continue;
-		}
-
-		if (Visited[X][Y] == true)
-		{
-			continue;
-		}
-
-		if (Map[X][Y] == 1)
+		if (Map[X][Y] == 1 && (Visited[X][Y] == false))
 		{
 			Visited[X][Y] = true;
 			DFS(X,Y);
@@ -52,7 +42,6 @@ void DFS(int CurrentX, int CurrentY)
 
 int main()
 {
-
 	int K = 0; //배추가 심어져있는 위치
 	int CabbageX = 0; //배추 X좌표
 	int CabbageY = 0; //배추 Y좌표
