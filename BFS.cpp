@@ -39,14 +39,13 @@ void PrintShortestPath(int Start,int Dest)
 	vector<int> Path;
 
 	//부모가 자기 자신일 때까지 Path.push
-	Path.push_back(Dest);
-	int TempParent = Parent[Dest];
-	while (Start != Parent[TempParent])
+	int Temp = Dest;
+	while (Temp != Start)
 	{
-		Path.push_back(TempParent);
-		TempParent = Parent[TempParent];
+		Path.push_back(Temp);
+		Temp = Parent[Temp];
 	}
-	Path.push_back(TempParent);
+	Path.push_back(Start);
 
 	//Path 순서 뒤집기
 	reverse(Path.begin(), Path.end());
@@ -94,7 +93,7 @@ void BFS(int Start)
 
 int main()
 {
-	BFS(0);
-	PrintShortestPath(0,5);
+	BFS(1);
+	PrintShortestPath(1,5);
 	return 0;
 }
