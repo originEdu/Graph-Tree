@@ -73,7 +73,7 @@ void BFS(int Start)
 	while (!VertexQueue.empty())
 	{
 		int Current = VertexQueue.front();
-		cout << "방문 :" << Current << ", 부모누구?: "<< Parent[Current] << ", 거리몇?: "<< Distance[Current]<< endl;
+		//cout << "방문 :" << Current << ", 부모누구?: "<< Parent[Current] << ", 거리몇?: "<< Distance[Current]<< endl;
 		VertexQueue.pop();
 
 		for (int Next = 0; Next < VertexCount; Next++)
