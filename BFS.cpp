@@ -1,5 +1,7 @@
 ﻿#include <iostream>
 #include <queue>
+#include <vector>
+#include <algorithm>
 
 //BFS
 //너비 우선 탐색
@@ -23,16 +25,56 @@ int Graph[VertexCount][VertexCount] =
 
 bool Visited[VertexCount] = { 0 };
 
+int Distance[VertexCount] = { 0 }; // 시작 지점으로 부터 떨어진 거리 기록
+int Parent[VertexCount] = { 0 };   // 해당 정점의 부모를 기록
+
+void PrintShortestPath(int Start,int Dest)
+{
+	if (Visited[Dest]==false)
+	{
+		cout << "목적지까지 이동할 수 없습니다." << endl;
+		return;
+	}
+
+	vector<int> Path;
+
+	//부모가 자기 자신일 때까지 Path.push
+	Path.push_back(Dest);
+	int TempParent = Parent[Dest];
+	while (TempParent != Parent[TempParent])
+	{
+		Path.push_back(TempParent);
+		TempParent = Parent[TempParent];
+	}
+	Path.push_back(TempParent);
+
+	//Path 순서 뒤집기
+	reverse(Path.begin(), Path.end());
+
+	//출력
+	for (int i = 0; i < Path.size();i++)
+	{
+		cout << Path[i];
+		if (i<Path.size()-1)
+		{
+			cout << "->";
+		}
+	};
+	cout << endl;
+}
+
 void BFS(int Start)
 {
 	queue<int> VertexQueue;
 	VertexQueue.push(Start);
 	Visited[Start] = true;
+	Distance[Start] = 0;
+	Parent[Start] = 0;
 
 	while (!VertexQueue.empty())
 	{
 		int Current = VertexQueue.front();
-		cout << "방문 :" << Current << endl;
+		//cout << "방문 :" << Current << ", 부모누구?: "<< Parent[Current] << ", 거리몇?: "<< Distance[Current]<< endl;
 		VertexQueue.pop();
 
 		for (int Next = 0; Next < VertexCount; Next++)
@@ -44,6 +86,8 @@ void BFS(int Start)
 
 			VertexQueue.push(Next);
 			Visited[Next] = true;
+			Parent[Next] = Current;
+			Distance[Next] = Distance[Current]+1;
 		}
 	}
 }
@@ -51,5 +95,6 @@ void BFS(int Start)
 int main()
 {
 	BFS(0);
+	PrintShortestPath(0,5);
 	return 0;
 }
