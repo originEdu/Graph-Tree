@@ -38,7 +38,8 @@ void PrintShortestPath(int Start,int Dest)
 
 	vector<int> Path;
 
-	//부모가 자기 자신일 때까지 Path.push
+	//모두 연결되어 있다는 가정하에
+	//부모가 스타트 지점까지 반복
 	int Temp = Dest;
 	while (Temp != Start)
 	{
@@ -93,7 +94,7 @@ void BFS(int Start)
 
 int main()
 {
-	BFS(1);
-	PrintShortestPath(1,5);
+	BFS(0);
+	PrintShortestPath(0,5);
 	return 0;
 }
