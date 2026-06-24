@@ -28,39 +28,13 @@ bool Visited[VertexCount] = { 0 };
 int Distance[VertexCount] = { 0 }; // 시작 지점으로 부터 떨어진 거리 기록
 int Parent[VertexCount] = { 0 };   // 해당 정점의 부모를 기록
 
-void PrintShortestPath(int Start,int Dest)
+void BFS(int Start);
+void PrintShortestPath(int Start, int Dest);
+
+int main()
 {
-	if (Visited[Dest]==false)
-	{
-		cout << "목적지까지 이동할 수 없습니다." << endl;
-		return;
-	}
-
-	vector<int> Path;
-
-	//모두 연결되어 있다는 가정하에
-	//부모가 스타트 지점까지 반복
-	int Temp = Dest;
-	while (Temp != Start)
-	{
-		Path.push_back(Temp);
-		Temp = Parent[Temp];
-	}
-	Path.push_back(Start);
-
-	//Path 순서 뒤집기
-	reverse(Path.begin(), Path.end());
-
-	//출력
-	for (int i = 0; i < Path.size();i++)
-	{
-		cout << Path[i];
-		if (i<Path.size()-1)
-		{
-			cout << "->";
-		}
-	};
-	cout << endl;
+	PrintShortestPath(0,5);
+	return 0;
 }
 
 void BFS(int Start)
@@ -87,14 +61,42 @@ void BFS(int Start)
 			VertexQueue.push(Next);
 			Visited[Next] = true;
 			Parent[Next] = Current;
-			Distance[Next] = Distance[Current]+1;
+			Distance[Next] = Distance[Current] + 1;
 		}
 	}
 }
 
-int main()
+void PrintShortestPath(int Start, int Dest)
 {
-	BFS(0);
-	PrintShortestPath(0,5);
-	return 0;
+	BFS(Start);
+	if (Visited[Dest] == false)
+	{
+		cout << "목적지까지 이동할 수 없습니다." << endl;
+		return;
+	}
+
+	vector<int> Path;
+
+	//스타트 지점까지 반복
+	int Temp = Dest;
+	while (Temp != Start)
+	{
+		Path.push_back(Temp);
+		Temp = Parent[Temp];
+	}
+	Path.push_back(Start);
+
+	//Path 순서 뒤집기
+	reverse(Path.begin(), Path.end());
+
+	//출력
+	for (int i = 0; i < Path.size(); i++)
+	{
+		cout << Path[i];
+		if (i < Path.size() - 1)
+		{
+			cout << "->";
+		}
+	};
+	cout << endl;
 }
