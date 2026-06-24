@@ -41,7 +41,7 @@ void PrintShortestPath(int Start,int Dest)
 	//부모가 자기 자신일 때까지 Path.push
 	Path.push_back(Dest);
 	int TempParent = Parent[Dest];
-	while (TempParent != Parent[TempParent])
+	while (Start != Parent[TempParent])
 	{
 		Path.push_back(TempParent);
 		TempParent = Parent[TempParent];
@@ -74,7 +74,7 @@ void BFS(int Start)
 	while (!VertexQueue.empty())
 	{
 		int Current = VertexQueue.front();
-		//cout << "방문 :" << Current << ", 부모누구?: "<< Parent[Current] << ", 거리몇?: "<< Distance[Current]<< endl;
+		cout << "방문 :" << Current << ", 부모누구?: "<< Parent[Current] << ", 거리몇?: "<< Distance[Current]<< endl;
 		VertexQueue.pop();
 
 		for (int Next = 0; Next < VertexCount; Next++)
